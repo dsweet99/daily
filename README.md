@@ -9,4 +9,12 @@ PDFs go in `pdfs/daves_daily_YYYYMMDD.pdf`. After adding a PDF, append its filen
 
 ## GitHub Pages
 
-Publish from the `main` branch, folder `/` (root). If the site URL 404s after a push, enable that under the repo **Settings → Pages**.
+Site URL: https://dsweet99.github.io/daily/
+
+Enable once under **Settings → Pages** (https://github.com/dsweet99/daily/settings/pages):
+
+- Source: **Deploy from a branch**
+- Branch: `main` or `gh-pages`, folder `/` (root)
+- Save
+
+Until that is enabled, the github.io URL returns 404. You can still open `index.html` locally.
