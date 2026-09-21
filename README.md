@@ -17,4 +17,23 @@ Enable once under **Settings → Pages** (https://github.com/dsweet99/daily/sett
 - Branch: `main` or `gh-pages`, folder `/` (root)
 - Save
 
-Until that is enabled, the github.io URL returns 404. You can still open `index.html` locally.
+Until that is enabled, the github.io URL returns 404.
+
+### Via GitHub CLI (once)
+
+```bash
+gh auth login
+gh api --method POST -H "Accept: application/vnd.github+json" \
+  /repos/dsweet99/daily/pages \
+  -f build_type=legacy -f source[branch]=main -f source[path]=/
+```
+
+If the site already exists, use `--method PUT` with the same `-f` fields instead of `POST`.
+
+### Local preview
+
+```bash
+python3 -m http.server 8765
+```
+
+Then open http://127.0.0.1:8765/ (or open `index.html` directly).
