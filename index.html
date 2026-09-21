@@ -64,13 +64,9 @@
       margin-bottom: 0.2rem;
     }
     a .label { font-size: 1.15rem; }
-    .empty, .note {
+    .empty {
       color: var(--muted);
       line-height: 1.5;
-    }
-    .note {
-      margin-top: 2rem;
-      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -80,7 +76,6 @@
     <p class="lede">Recent briefs — past five days.</p>
     <ul id="days"></ul>
     <p id="empty" class="empty" hidden>No PDFs for the past five days yet.</p>
-    <p class="note">Store each brief as <code>pdfs/daves_daily_YYYYMMDD.pdf</code> and add the filename to the list in <code>index.html</code>.</p>
   </main>
   <script>
     // Newest first. Keep filenames that should appear when they fall in the past-five-days window.
