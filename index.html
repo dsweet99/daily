@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dave's Daily</title>
+  <style>
+    :root {
+      --ink: #1a2332;
+      --muted: #5a6577;
+      --paper: #f7f9fc;
+      --line: #d5dde8;
+      --accent: #0b6e4f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #e4eef8 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #e8f3ec 0%, transparent 50%),
+        var(--paper);
+    }
+    main {
+      max-width: 36rem;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 4rem;
+    }
+    h1 {
+      margin: 0 0 0.35rem;
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      margin: 0 0 2rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.45;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+    }
+    li { border-bottom: 1px solid var(--line); }
+    a {
+      display: block;
+      padding: 0.95rem 0.15rem;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    a:hover, a:focus-visible { color: var(--accent); }
+    a .date {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.2rem;
+    }
+    a .label { font-size: 1.15rem; }
+    .empty, .note {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .note {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Dave's Daily</h1>
+    <p class="lede">Recent briefs — past five days.</p>
+    <ul id="days"></ul>
+    <p id="empty" class="empty" hidden>No PDFs for the past five days yet.</p>
+    <p class="note">Store each brief as <code>pdfs/daves_daily_YYYYMMDD.pdf</code> and add the filename to the list in <code>index.html</code>.</p>
+  </main>
+  <script>
+    // Newest first. Keep filenames that should appear when they fall in the past-five-days window.
+    const PDFS = [
+      "daves_daily_20260921.pdf"
+    ];
+
+    (function () {
+      function ymd(d) {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return y + m + day;
+      }
+
+      function stampFromName(name) {
+        const m = /^daves_daily_(\d{8})\.pdf$/.exec(name);
+        return m ? m[1] : null;
+      }
+
+      function pretty(stamp) {
+        const y = +stamp.slice(0, 4);
+        const m = +stamp.slice(4, 6) - 1;
+        const day = +stamp.slice(6, 8);
+        return new Date(y, m, day).toLocaleDateString(undefined, {
+          weekday: "short",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+      }
+
+      function lastFiveStamps() {
+        const today = new Date();
+        const set = {};
+        for (let i = 0; i < 5; i++) {
+          set[ymd(new Date(today.getFullYear(), today.getMonth(), today.getDate() - i))] = true;
+        }
+        return set;
+      }
+
+      const ul = document.getElementById("days");
+      const empty = document.getElementById("empty");
+      const window = lastFiveStamps();
+      let shown = 0;
+
+      for (let i = 0; i < PDFS.length; i++) {
+        const name = PDFS[i];
+        const stamp = stampFromName(name);
+        if (!stamp || !window[stamp]) continue;
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = "pdfs/" + name;
+        a.innerHTML =
+          '<span class="date">' + pretty(stamp) + "</span>" +
+          '<span class="label">Dave\'s Daily</span>';
+        li.appendChild(a);
+        ul.appendChild(li);
+        shown += 1;
+      }
+
+      if (!shown) empty.hidden = false;
+    })();
+  </script>
+</body>
+</html>
