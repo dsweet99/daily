@@ -11,15 +11,9 @@ PDFs go in `pdfs/daves_daily_YYYYMMDD.pdf`. After adding a PDF, append its filen
 
 Site URL: https://dsweet99.github.io/daily/
 
-Enable once under **Settings → Pages** (https://github.com/dsweet99/daily/settings/pages):
+Pages is enabled: **Deploy from a branch**, branch `main`, folder `/` (root). The repo must stay **public** for free-tier GitHub Pages (private repos need a paid plan).
 
-- Source: **Deploy from a branch**
-- Branch: `main` or `gh-pages`, folder `/` (root)
-- Save
-
-Until that is enabled, the github.io URL returns 404.
-
-### Via GitHub CLI (once)
+### Re-enable via GitHub CLI (if needed)
 
 ```bash
 gh auth login
