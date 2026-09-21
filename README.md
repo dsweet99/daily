@@ -5,7 +5,7 @@ Static site for daily PDF briefs.
 - Home page: [`index.html`](index.html) lists the past five days of PDFs under `pdfs/`.
 - Live (GitHub Pages): https://dsweet99.github.io/daily/
 
-PDFs go in `pdfs/daves_daily_YYYYMMDD.pdf`.
+PDFs go in `pdfs/daves_daily_YYYYMMDD.pdf`. After adding a PDF, append its filename to the `PDFS` list in `index.html`.
 
 ## GitHub Pages
 

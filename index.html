@@ -80,15 +80,25 @@
     <p class="lede">Recent briefs — past five days.</p>
     <ul id="days"></ul>
     <p id="empty" class="empty" hidden>No PDFs for the past five days yet.</p>
-    <p class="note">Files live at <code>pdfs/daves_daily_YYYYMMDD.pdf</code>.</p>
+    <p class="note">Store each brief as <code>pdfs/daves_daily_YYYYMMDD.pdf</code> and add the filename to the list in <code>index.html</code>.</p>
   </main>
   <script>
+    // Newest first. Keep filenames that should appear when they fall in the past-five-days window.
+    const PDFS = [
+      "daves_daily_20260921.pdf"
+    ];
+
     (function () {
       function ymd(d) {
         const y = d.getFullYear();
         const m = String(d.getMonth() + 1).padStart(2, "0");
         const day = String(d.getDate()).padStart(2, "0");
         return y + m + day;
+      }
+
+      function stampFromName(name) {
+        const m = /^daves_daily_(\d{8})\.pdf$/.exec(name);
+        return m ? m[1] : null;
       }
 
       function pretty(stamp) {
@@ -103,56 +113,36 @@
         });
       }
 
-      function addLink(ul, stamp, href) {
+      function lastFiveStamps() {
+        const today = new Date();
+        const set = {};
+        for (let i = 0; i < 5; i++) {
+          set[ymd(new Date(today.getFullYear(), today.getMonth(), today.getDate() - i))] = true;
+        }
+        return set;
+      }
+
+      const ul = document.getElementById("days");
+      const empty = document.getElementById("empty");
+      const window = lastFiveStamps();
+      let shown = 0;
+
+      for (let i = 0; i < PDFS.length; i++) {
+        const name = PDFS[i];
+        const stamp = stampFromName(name);
+        if (!stamp || !window[stamp]) continue;
         const li = document.createElement("li");
         const a = document.createElement("a");
-        a.href = href;
+        a.href = "pdfs/" + name;
         a.innerHTML =
           '<span class="date">' + pretty(stamp) + "</span>" +
           '<span class="label">Dave\'s Daily</span>';
         li.appendChild(a);
         ul.appendChild(li);
+        shown += 1;
       }
 
-      function stamps() {
-        const today = new Date();
-        const out = [];
-        for (let i = 0; i < 5; i++) {
-          out.push(ymd(new Date(today.getFullYear(), today.getMonth(), today.getDate() - i)));
-        }
-        return out;
-      }
-
-      async function exists(href) {
-        try {
-          const r = await fetch(href, { method: "HEAD" });
-          if (r.ok) return true;
-          // Some hosts dislike HEAD; try a ranged GET.
-          const g = await fetch(href, { method: "GET", headers: { Range: "bytes=0-0" } });
-          return g.ok || g.status === 206;
-        } catch (_) {
-          return false;
-        }
-      }
-
-      async function main() {
-        const ul = document.getElementById("days");
-        const empty = document.getElementById("empty");
-        const fileProto = location.protocol === "file:";
-        let shown = 0;
-
-        for (const stamp of stamps()) {
-          const href = "pdfs/daves_daily_" + stamp + ".pdf";
-          if (fileProto || (await exists(href))) {
-            addLink(ul, stamp, href);
-            shown += 1;
-          }
-        }
-
-        if (!shown) empty.hidden = false;
-      }
-
-      main();
+      if (!shown) empty.hidden = false;
     })();
   </script>
 </body>
