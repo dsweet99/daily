@@ -10,7 +10,8 @@ Create a one-page .pdf (from .tex) update of the latest and greatest news on
  - We don't need current levels or returns predictions. Instead, deliver substance, surprise, or understanding.
 
 # Form
-- Make it easy to read.
+- Make it easy to read (legible).
+- Make it easy to read (legible) on a phone. Produce one long page with fonts large enough to be read easily on an iPhone screen with 1260 × 2736 pixels at 460 ppi. 
 - Use clean, beautiful design.
 - Mention that it was created with 'malvin', and link to malvin's github.
 
