@@ -68,23 +68,36 @@
       border-top: 1px solid var(--line);
     }
     li { border-bottom: 1px solid var(--line); }
-    #days a {
-      display: block;
+    #days li {
       padding: 0.95rem 0.15rem;
-      color: var(--ink);
-      text-decoration: none;
-      transition: color 0.15s ease;
     }
-    #days a:hover, #days a:focus-visible { color: var(--accent); }
-    #days a .date {
+    #days .date {
       display: block;
       font-size: 0.85rem;
       color: var(--muted);
       font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
       letter-spacing: 0.02em;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.35rem;
     }
-    #days a .label { font-size: 1.15rem; }
+    #days .label {
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
+    }
+    #days .versions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+    }
+    #days .versions a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+      font-size: 1rem;
+    }
+    #days .versions a:hover, #days .versions a:focus-visible {
+      color: var(--ink);
+    }
     .empty {
       color: var(--muted);
       line-height: 1.5;
@@ -103,9 +116,10 @@
     <a href="https://github.com/dsweet99/malvin">malvin</a>.
   </footer>
   <script>
-    // Newest first. Keep filenames that should appear when they fall in the past-five-days window.
+    // Newest first. Phone: daves_daily_YYYYMMDD.pdf; letter twin: …_YYYYMMDD_letter.pdf.
     const PDFS = [
       "daves_daily_20260924.pdf",
+      "daves_daily_20260924_letter.pdf",
       "daves_daily_20260923.pdf",
       "daves_daily_20260922.pdf",
       "daves_daily_20260921.pdf"
@@ -119,9 +133,11 @@
         return y + m + day;
       }
 
-      function stampFromName(name) {
-        const m = /^daves_daily_(\d{8})\.pdf$/.exec(name);
-        return m ? m[1] : null;
+      // Returns { stamp, kind } where kind is "phone" or "letter".
+      function parseName(name) {
+        const m = /^daves_daily_(\d{8})(_letter)?\.pdf$/.exec(name);
+        if (!m) return null;
+        return { stamp: m[1], kind: m[2] ? "letter" : "phone" };
       }
 
       function pretty(stamp) {
@@ -145,27 +161,55 @@
         return set;
       }
 
+      const KIND_LABEL = { phone: "Phone", letter: "Letter" };
+      const KIND_ORDER = ["phone", "letter"];
+
       const ul = document.getElementById("days");
       const empty = document.getElementById("empty");
       const window = lastFiveStamps();
-      let shown = 0;
 
+      // Group editions by day stamp (preserve first-seen order from PDFS).
+      const byStamp = {};
+      const stampOrder = [];
       for (let i = 0; i < PDFS.length; i++) {
         const name = PDFS[i];
-        const stamp = stampFromName(name);
-        if (!stamp || !window[stamp]) continue;
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = "pdfs/" + name;
-        a.innerHTML =
-          '<span class="date">' + pretty(stamp) + "</span>" +
-          '<span class="label">Dave\'s Daily</span>';
-        li.appendChild(a);
-        ul.appendChild(li);
-        shown += 1;
+        const meta = parseName(name);
+        if (!meta || !window[meta.stamp]) continue;
+        if (!byStamp[meta.stamp]) {
+          byStamp[meta.stamp] = {};
+          stampOrder.push(meta.stamp);
+        }
+        byStamp[meta.stamp][meta.kind] = name;
       }
 
-      if (!shown) empty.hidden = false;
+      for (let i = 0; i < stampOrder.length; i++) {
+        const stamp = stampOrder[i];
+        const editions = byStamp[stamp];
+        const li = document.createElement("li");
+        const date = document.createElement("span");
+        date.className = "date";
+        date.textContent = pretty(stamp);
+        const label = document.createElement("span");
+        label.className = "label";
+        label.textContent = "Dave's Daily";
+        const versions = document.createElement("div");
+        versions.className = "versions";
+        for (let k = 0; k < KIND_ORDER.length; k++) {
+          const kind = KIND_ORDER[k];
+          const name = editions[kind];
+          if (!name) continue;
+          const a = document.createElement("a");
+          a.href = "pdfs/" + name;
+          a.textContent = KIND_LABEL[kind];
+          versions.appendChild(a);
+        }
+        li.appendChild(date);
+        li.appendChild(label);
+        li.appendChild(versions);
+        ul.appendChild(li);
+      }
+
+      if (!stampOrder.length) empty.hidden = false;
     })();
   </script>
 </body>
