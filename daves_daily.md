@@ -2,18 +2,24 @@ Create a one-page .pdf (from .tex) update of the latest and greatest news on
 - AI
  - Latest developments in algorithms, software, businesses, politics related to AI
  - Discussion of impact on people and society
+ - Include one plot or chart about progress in AI or AI's impact on society. Reference
+    its source in the caption.
 - Bayesian optimization
  - Scaling to larger problems
  - Greater data efficiency
  - Connections to AI
 - Trading and markets, especially US equities
  - We don't need current levels or returns predictions. Instead, deliver substance, surprise, or understanding.
+ - Look for appliations of AI and BO to trading, especially HFT.
 
 # Form
 - Make it easy to read (legible).
 - Make it easy to read (legible) on a phone. Produce one long page with fonts large enough to be read easily on an iPhone screen with 1260 × 2736 pixels at 460 ppi. 
 - Use clean, beautiful design.
+- Summarize numerical information in a table or plot.
 - Mention that it was created with 'malvin', and link to malvin's github.
+
+**Look at the pdf to make sure the design is good.**
 
 # Content
 - Focus on recent news, especially the past 24 hours. Find things that might interest the user.
