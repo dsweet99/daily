@@ -14,12 +14,14 @@ Create a one-page .pdf (from .tex) update of the latest and greatest news on
 
 # Form
 - Make it easy to read (legible).
-- Make it easy to read (legible) on a phone. Produce one long page with fonts large enough to be read easily on an iPhone screen with 1260 × 2736 pixels at 460 ppi 
+- Create two pdfs with the same text and other content elements:
+  - 1. Make it easy to read (legible) on a phone. Produce one long page with fonts large enough to be read easily on an iPhone screen with 1260 × 2736 pixels at 460 ppi
+  - 2. Make it easy to read (legible) on a laptop. Produce one letter-sized page.
 - Use clean, beautiful design.
 - Include a tldr at the top with the three most interesting points in the document.
 - Mention that it was created with 'malvin', and link to malvin's github.
 
-**Look at the pdf to make sure the design is good.**
+**Look at each pdf to make sure the design is good.**
 
 # Content
 - Focus on recent news, especially the past 24 hours. Find things that might interest the user.
@@ -28,4 +30,4 @@ Create a one-page .pdf (from .tex) update of the latest and greatest news on
 
 # Output
 - Write to pdfs/daves_daily_YYYYMMDD.pdf, where YYYYMMDD is today's date. If the file exists, overwrite it. We're probably just iterating on the document.
-- Add, commit, and push the .pdf.
+- Add, commit, and push the pdfs
