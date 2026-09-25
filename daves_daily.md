@@ -16,7 +16,7 @@ Create a one-page .pdf (from .tex) update of the latest and greatest news on
 - Make it easy to read (legible).
 - Create two pdfs with the same text and other content elements:
   - 1. Make it easy to read (legible) on a phone. Produce one long page with fonts large enough to be read easily on an iPhone screen with 1260 × 2736 pixels at 460 ppi
-  - 2. Make it easy to read (legible) on a laptop. Produce one letter-sized page.
+  - 2. Make it easy to read (legible) on a laptop. Produce one letter-sized (8.5" x 11", portrait orientation) page.
 - Use clean, beautiful design.
 - Include a tldr at the top with the three most interesting points in the document.
 - Mention that it was created with 'malvin', and link to malvin's github.
