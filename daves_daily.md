@@ -1,9 +1,12 @@
-Create a one-page .pdf (from .tex) update of the latest and greatest news on
+Create a one-page .pdf (from .tex).
+
+Update of the latest and greatest news on
 - AI
  - Latest developments in algorithms, software, businesses, politics related to AI
  - Discussion of impact on people and society
  - Include one plot or chart about progress in AI or AI's impact on society. Reference
-    its source in the caption.
+    its source in the caption. Make it pertinent to today's news or trends. Vary it
+    from day to day.
 - Bayesian optimization
  - Scaling to larger problems
  - Greater data efficiency
@@ -11,6 +14,10 @@ Create a one-page .pdf (from .tex) update of the latest and greatest news on
 - Trading and markets, especially US equities
  - We don't need current levels or returns predictions. Instead, deliver substance, surprise, or understanding.
  - Look for appliations of AI and BO to trading, especially HFT.
+
+## Content
+- Focus on recent news, especially the past 24 hours. Find things that might interest the user.
+- Provide clickable links to papers, X posts, news or magazine articles, blog posts, github repos, etc.
 
 # Form
 - Make it easy to read (legible).
@@ -23,10 +30,8 @@ Create a one-page .pdf (from .tex) update of the latest and greatest news on
 
 **Look at each pdf to make sure the design is good.**
 
-# Content
-- Focus on recent news, especially the past 24 hours. Find things that might interest the user.
-- Provide clickable links to papers, X posts, news or magazine articles, blog posts, github repos, etc.
-
+# Sources
+- Use only high-quality, well-known sources (exception: source is specific to the story or has an exclusive)
 
 # Output
 - Write to pdfs/daves_daily_YYYYMMDD.pdf, where YYYYMMDD is today's date. If the file exists, overwrite it. We're probably just iterating on the document.
