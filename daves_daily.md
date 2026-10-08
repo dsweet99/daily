@@ -1,26 +1,31 @@
 Create a one-page .pdf (from .tex).
 
 Update of the latest and greatest news on
-- AI
+## AI
  - Latest developments in algorithms, software, businesses, politics related to AI
  - Discussion of impact on people and society
  - Include one plot or chart about progress in AI or AI's impact on society. Reference
     its source in the caption. Make it pertinent to today's news or trends. Vary it
     from day to day.
-- Bayesian optimization
+## Bayesian optimization
  - Scaling to larger problems
  - Greater data efficiency
  - Connections to AI
-- Trading and markets, especially US equities
+ - Cover only one BO paper or project per day, in a little more depth than the other stories.
+ - Don't repeat any BO coverage from previous issues if Dave's Daily.
+ 
+## Trading and markets, especially US equities
  - We don't need current levels or returns predictions. Instead, deliver substance, surprise, or understanding.
- - Look for appliations of AI and BO to trading, especially HFT.
+ - Look for applications of AI and BO to trading, especially HFT.
 
-## Content
+
+# Content
 - Focus on recent news, especially the past 24 hours. Find things that might interest the user.
-- Provide clickable links to papers, X posts, news or magazine articles, blog posts, github repos, etc.
+- Provide clickable links to papers, X (twitter) posts, news or magazine articles, blog posts, github repos, etc.
 
 # Form
 - Make it easy to read (legible).
+- Style it like the recent Dave's Daily pdfs.
 - Create two pdfs with the same text and other content elements:
   - 1. Make it easy to read (legible) on a phone. Produce one long page with fonts large enough to be read easily on an iPhone screen with 1260 × 2736 pixels at 460 ppi
   - 2. Make it easy to read (legible) on a laptop. Produce one letter-sized (8.5" x 11", portrait orientation) page.
