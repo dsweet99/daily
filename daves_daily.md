@@ -40,4 +40,5 @@ Update of the latest and greatest news on
 
 # Output
 - Write to pdfs/daves_daily_YYYYMMDD.pdf, where YYYYMMDD is today's date. If the file exists, overwrite it. We're probably just iterating on the document.
+- Update index.html
 - Add, commit, and push the pdfs
